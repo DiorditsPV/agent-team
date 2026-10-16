@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="800" height="360" role="img" aria-label="A role is permanent: its file, zone and worktree stay; its sessions replace one another through handoff and restart --fresh">
+  <style>
+    text { font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 28px; }
+    .t { fill: #1f2328; }
+    .s { fill: #59636e; }
+    .b { font-weight: 600; }
+    .a { fill: #0969da; }
+    .box { fill: #f6f8fa; stroke: #d1d9e0; stroke-width: 2; }
+    .acc { fill: #ddf4ff; stroke: #0969da; stroke-width: 2.5; }
+    .ln { fill: none; stroke: #59636e; stroke-width: 2.5; }
+    .dl { fill: none; stroke: #59636e; stroke-width: 2; stroke-dasharray: 6 6; }
+    .al { fill: none; stroke: #0969da; stroke-width: 3; }
+    .hd { fill: #0969da; }
+    .ctx { fill: #59636e; }
+    .ctxbg { fill: #d1d9e0; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="hd" d="M0,0 L10,5 L0,10 z"/></marker>
+  </defs>
+
+  <!-- the role: permanent -->
+  <rect class="acc" x="10" y="10" width="780" height="80" rx="10"/>
+  <text class="a b" x="400" y="60" text-anchor="middle">role: file · zone · worktree</text>
+
+  <line class="dl" x1="110" y1="90" x2="110" y2="150"/>
+  <line class="dl" x1="400" y1="90" x2="400" y2="150"/>
+  <line class="dl" x1="690" y1="90" x2="690" y2="150"/>
+
+  <!-- sessions: disposable; the bar under each name is its context filling up -->
+  <rect class="box" x="10" y="150" width="200" height="100" rx="10"/>
+  <text class="t" x="110" y="196" text-anchor="middle">session 1</text>
+  <rect class="ctxbg" x="30" y="218" width="160" height="12" rx="6"/>
+  <rect class="ctx" x="30" y="218" width="160" height="12" rx="6"/>
+
+  <rect class="box" x="300" y="150" width="200" height="100" rx="10"/>
+  <text class="t" x="400" y="196" text-anchor="middle">session 2</text>
+  <rect class="ctxbg" x="320" y="218" width="160" height="12" rx="6"/>
+  <rect class="ctx" x="320" y="218" width="160" height="12" rx="6"/>
+
+  <rect class="box" x="590" y="150" width="200" height="100" rx="10"/>
+  <text class="t" x="690" y="196" text-anchor="middle">session 3</text>
+  <rect class="ctxbg" x="610" y="218" width="160" height="12" rx="6"/>
+  <rect class="ctx" x="610" y="218" width="50" height="12" rx="6"/>
+
+  <line class="al" x1="212" y1="200" x2="296" y2="200" marker-end="url(#ah)"/>
+  <line class="al" x1="502" y1="200" x2="586" y2="200" marker-end="url(#ah)"/>
+
+  <text class="s" x="255" y="300" text-anchor="middle">handoff</text>
+  <text class="s" x="255" y="338" text-anchor="middle">restart --fresh</text>
+  <text class="s" x="545" y="300" text-anchor="middle">handoff</text>
+  <text class="s" x="545" y="338" text-anchor="middle">restart --fresh</text>
+</svg>

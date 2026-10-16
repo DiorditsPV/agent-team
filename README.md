@@ -1,198 +1,66 @@
 # agent-team
 
-Команда агентов Claude Code в tmux: вы говорите с одним менеджером, роли постоянны, а сессии одноразовы — состояние живёт в git и трекере, а не в контексте агента.
+A team of Claude Code agents in tmux: you talk to one manager; roles are permanent, sessions are disposable — state lives in git and your tracker, not in the agent's context.
 
-> **A team of Claude Code agents in tmux: you talk to one manager; roles are permanent, sessions are disposable — state lives in git and your tracker, not in the agent's context.**
->
-> `team` starts Claude Code sessions from role files in your project's `agents/` directory. You talk to one manager session; the other roles work in neighbouring tmux panes, each in its own git worktree and with a restricted tool list. The manager assigns tasks, accepts work by checking commits and test output, and merges. The documentation and the role library are in Russian.
+`team` is a command-line tool that starts Claude Code sessions from role files kept in your project's `agents/` directory. The tool knows nothing about your project: roles, zones, rules and the test command all live in those files.
 
-`team` — CLI, который поднимает роли проекта в tmux и управляет ими. Роли описываются файлами в каталоге `agents/` вашего проекта; сам инструмент о проекте ничего не знает.
+## How it works
 
-Этот README — для того, кто хочет запустить команду на своём проекте. Устройство и принятые решения — в [`docs/SPEC.md`](docs/SPEC.md). Правила для агентов, которые развивают сам инструмент, — в [`CLAUDE.md`](CLAUDE.md).
+You give tasks to the manager; the manager hands them to roles working next to it, and the work itself lands in git and your tracker.
 
-## Что вы видите в tmux
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/images/architecture-dark.svg"><img src="docs/images/architecture-light.svg" alt="You talk to the manager. Roles sit in tmux panes next to it, each with its own worktree and tool list. State lives in git and the tracker." width="800"></picture>
 
-Команда проекта живёт в одной tmux-сессии `team-<проект>`. Вы пишете только менеджеру. Менеджер раздаёт задачи ролям сообщениями, роли отчитываются ему, а их работа видна в их панелях.
+The whole team lives in one tmux session, `team-<project>`. In the `panes` layout that `team init` sets up, the manager takes the left half of the window and every other role gets a pane on the right, so you can attach and watch all of them at once. A role that edits files works in its own git worktree on its own branch. Every role starts with a fixed list of allowed tools: file reading and editing, `git`, the project's test command, and whatever its role file adds. The manager sends tasks to roles with Claude Code's built-in `SendMessage`, addressed to each role's session socket.
 
-В раскладке `panes` все роли — панели одного окна. Заготовка `team init` ставит эту раскладку; если поле `layout` не задано, действует `windows`. Менеджер занимает левую половину, остальные роли стоят справа, в рамке каждой панели — имя роли. На схеме — команда из менеджера и двух ролей библиотеки (`developer`, `reviewer`):
+## Roles are permanent, sessions are disposable
 
-```
-┌────────────────────────────┬──────── developer ────────┐
-│ manager                    │ правит код в своём        │
-│                            │ worktree                  │
-│ здесь вы ставите задачи    ├──────── reviewer ─────────┤
-│ и принимаете итог          │ проверяет ветку           │
-└────────────────────────────┴───────────────────────────┘
-```
+A role keeps its file, name, zone and worktree; the Claude session behind it can be replaced at any time without losing work.
 
-В раскладке `windows` у каждой роли своё окно, менеджер — первое. Раскладка задаётся полем `layout` в `agents/team.yaml`.
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/images/role-session-dark.svg"><img src="docs/images/role-session-light.svg" alt="One permanent role above three sessions in a row; each session hands off to the next through handoff and restart --fresh." width="800"></picture>
 
-Клавиши tmux (префикс `Ctrl-b`):
+The bar inside each session is its context filling up. When a session's context is full, or the session crashes, the manager asks the role for a handoff: a short note on what is done, what is in progress and what comes next. The role prints it in its pane and posts it to the task in the tracker. Then `team restart <role> --fresh` starts a new session that picks up from the handoff, the branch and the tracker. Without `--fresh`, `restart` resumes the same session.
 
-- `Ctrl-b` и стрелка — соседняя панель;
-- `Ctrl-b z` — развернуть панель или вернуть;
-- `Ctrl-b d` — отключиться от tmux; агенты продолжают работать.
+## The path of a task
 
-Не закрывайте панель через `exit`: это останавливает агента.
+The manager accepts work by checking facts — the commit and the test output — not by reading the report.
 
-## Быстрый старт
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/images/task-flow-dark.svg"><img src="docs/images/task-flow-light.svg" alt="The manager assigns a task; the role works on its branch, commits and reports; the manager checks the commit and tests, then fast-forwards main or returns the work." width="800"></picture>
 
-Нужны:
+A role never merges its own work. The manager checks the branch, runs the tests and either returns the task or fast-forwards `main` to the role's branch. The tool itself never merges anything: when to merge, and whose consent it needs, is written in the manager's role file. The manager from the role library merges only what you named, and a reviewer role can sit between the report and the merge.
 
-- `tmux`;
-- Claude Code: команда `claude` в `PATH`, вход выполнен;
-- [uv](https://docs.astral.sh/uv/) и Python 3.10 или новее;
-- git: роли работают в git worktree вашего проекта.
+## Principles
 
-1. Склонируйте репозиторий и установите команду `team`:
+- **One conversation.** You talk only to the manager; it assigns tasks and accepts work.
+- **Identity apart from session.** A role is a file, a name, a zone and a worktree; its session is replaceable.
+- **State outside the agent.** Tasks live in the tracker and results in git, so any session can be recreated.
+- **Checking and merging are separate.** The one who does the work does not accept or merge it.
+- **Restricted permissions.** Each role gets an explicit tool list; the tool never switches permission checks off, and roles inherit your default permission mode.
+- **No project knowledge in the tool.** Zones, safety rules, the tracker and the test command live in `agents/`.
 
-   ```bash
-   git clone https://github.com/DiorditsPV/agent-team
-   cd agent-team
-   uv tool install --editable .
-   ```
+The approach comes from Steve Yegge's Gas Town: identity separate from session, state outside the agent, a manager that assigns work, and checking kept apart from merging. Its stack (Beads, Dolt, the Deacon and Dogs hierarchy) is left out: here tmux holds the sessions, git worktrees hold the work, and the tracker you already use holds the tasks.
 
-   Команда `team` появляется в `PATH`. Удалить её: `uv tool uninstall agent-team`. Без установки команду можно вызывать из каталога любого проекта как `uv run --project <путь к клону> team …`.
+## Get started
 
-2. Подключите скилл `/a-team` для Claude Code — симлинком из клона, оставаясь в его каталоге:
-
-   ```bash
-   mkdir -p ~/.claude/skills
-   ln -s "$PWD/skill/a-team" ~/.claude/skills/a-team
-   ```
-
-   Скилл ведёт вас по шагам ниже из обычной сессии Claude Code: в каталоге проекта наберите `/a-team`. Шаги можно пройти и руками.
-
-3. Подключите проект. Команды `team` ищут `agents/team.yaml` в текущем каталоге и выше, поэтому запускайте их из каталога проекта:
-
-   ```bash
-   cd <ваш проект>
-   team init      # создаёт agents/: team.yaml, роли manager и executor, правила, шаблоны
-   ```
-
-   Отредактируйте созданное под проект:
-
-   - `agents/team.yaml` — состав ролей, раскладка, команда тестов. У каждой роли поле `start` говорит, когда её поднимать: `manual` — менеджер, его поднимает `team up`; `always` — вместе с менеджером; `on_demand` и `per_task` — менеджер поднимает сам под задачу;
-   - `agents/roles/*.md` — по файлу на роль: frontmatter (зона, worktree, модель, права) и инструкция агенту. Роль с полем `worktree` работает в отдельном git worktree `<worktree_root>/<dir>` на ветке `branch`; инструмент создаёт его при первом запуске роли. Поля описаны в `docs/SPEC.md`, раздел «Роль»;
-   - `agents/shared/*.md` — правила, общие для нескольких ролей; роль подключает их полем `includes`.
-
-   Готовые роли можно взять из [библиотеки ролей](examples/README.md). Добавьте `.team/` в `.gitignore` проекта: там лежит кеш состояния команды.
-
-4. Проверьте описание команды:
-
-   ```bash
-   team check
-   ```
-
-   Итог — строка `роли: …; ошибок N, предупреждений M`. Поднимать команду можно, когда ошибок 0.
-
-5. Поднимите команду и подключитесь:
-
-   ```bash
-   team up        # поднимает менеджера и роли со start: always
-   team attach    # подключение к tmux
-   ```
-
-   В каталоге, где `claude` ещё не запускался, он спрашивает, доверяете ли вы папке. Вопрос появится по разу у менеджера и у каждой роли с новым worktree. Роль ждёт ответа в своей панели: ответьте там сами, инструмент за вас не соглашается.
-
-6. Напишите менеджеру в его панели первую задачу или передайте текущие дела: что в работе, какие ветки, что решено. Скилл `/a-team` собирает такую передачу сам.
-
-## Поток работы
-
-`team` без аргументов печатает этот поток кратко.
-
-### Работа
-
-Задачи ставите менеджеру. Остальное он делает сам командами `team`; вы вызываете их, только когда хотите посмотреть.
-
-- Менеджер поднимает роль под задачу (`team spawn <роль>`) и выдаёт задачу сообщением SendMessage на адрес роли (`team addr <роль>`).
-- Роль делает задачу в своём worktree и отчитывается менеджеру.
-- Менеджер принимает работу по факту — коммит и вывод тестов — и сливает её в основную ветку. Когда и с чьего согласия он сливает, задаёт его роль, а не инструмент: менеджер из библиотеки сливает только то, что вы назвали.
-- Когда работа роли закончена, менеджер её останавливает (`team down <роль>`).
-
-Сообщения идут встроенным обменом Claude Code (SendMessage) на адрес сокета роли, а не по имени. Так роль видит, что пишет менеджер, а неуникальное имя сессии не уводит сообщение не туда.
-
-### Смена сессии роли
-
-Контекст роли переполнился, сессия упала или роль надо перезапустить с новой инструкцией:
-
-Эти команды обычно выполняет менеджер; вы можете попросить его об этом.
+You need tmux, git, [uv](https://docs.astral.sh/uv/) and Claude Code (`claude` signed in and on your `PATH`).
 
 ```bash
-team handoff <роль>          # печатает адрес и запрос передачи; менеджер отправляет его SendMessage
-team peek <роль>             # убедиться, что передача записана
-team restart <роль>          # продолжить ту же сессию Claude
-team restart <роль> --fresh  # новая сессия; контекст — из передачи и трекера
+git clone https://github.com/DiorditsPV/agent-team && cd agent-team
+uv tool install --editable .
+cd <your project> && team init      # creates agents/; edit the roles, then run team check
+team up && team attach              # starts the manager and opens tmux
 ```
 
-Передача заполняется по шаблону `agents/templates/handoff.md`: роль выводит её в своей панели и, если у неё есть доступ к трекеру, пишет комментарием в задачу.
+**Full guide for you or your agent:** [`docs/agent-guide.md`](docs/agent-guide.md). It covers requirements, the `/a-team` skill, editing `agents/`, the folder-trust prompt, the first message to the manager, every command, session replacement, stopping, and known limitations. You can hand it to Claude Code as is.
 
-Если остановлена вся команда (`team down`), поднимите её с прежними сессиями: `team up --resume`.
+## Documentation
 
-### Остановка
+- [`docs/agent-guide.md`](docs/agent-guide.md) — setup and operation, step by step.
+- [`examples/`](examples/README.md) — role library: manager, developer, writer, reviewer, judge, data engineer, optimizer, manager's assistant, watcher, and shared rules for them.
+- [`docs/SPEC.md`](docs/SPEC.md) — design and decisions: file formats, launch, permissions, messaging.
+- [`CLAUDE.md`](CLAUDE.md) — brief for agents that develop the tool itself.
 
-```bash
-team down <роль>   # остановить одну роль
-team down          # остановить всю команду
-```
+The guide and this page are in English; the specification, the role library and the `/a-team` skill are in Russian.
 
-Перед остановкой роли с незаконченной работой запросите передачу (`team handoff <роль>`).
+## License
 
-### Команды
-
-| Команда                            | Что делает                                                                                  |
-|------------------------------------|---------------------------------------------------------------------------------------------|
-| `team`                             | печатает поток работы                                                                       |
-| `team init`                        | создаёт `agents/` в текущем каталоге; существующий `team.yaml` не перезаписывает            |
-| `team check`                       | проверяет описание команды без запуска: роли, подключённые файлы, worktree, пересечение зон |
-| `team up [--resume]`               | поднимает менеджера и роли со `start: always`; `--resume` продолжает прежние сессии Claude  |
-| `team spawn <роль> [--resume]`     | поднимает одну роль                                                                         |
-| `team status`                      | роли, состояние, сколько молчат, адрес для SendMessage                                      |
-| `team addr <роль>`                 | адрес роли (`uds:…`) для SendMessage                                                        |
-| `team peek <роль> [строк]`         | последние строки панели роли, по умолчанию 40                                               |
-| `team attach [роль]`               | подключение к tmux; по умолчанию к панели менеджера                                         |
-| `team handoff <роль> [--paste]`    | печатает адрес и текст запроса передачи; с `--paste` вставляет запрос в строку ввода роли   |
-| `team restart <роль> [--fresh]`    | пересоздаёт сессию роли: продолжает прежнюю или, с `--fresh`, начинает новую                |
-| `team send <роль> --paste <текст>` | запасной путь: вставляет текст в строку ввода роли; роль примет его за слова пользователя   |
-| `team down [роль]`                 | останавливает роль или всю команду                                                          |
-
-Без `--paste` команда `team send` ничего не вставляет: она завершается ошибкой и называет адрес для SendMessage.
-
-## Библиотека ролей
-
-В [`examples/`](examples/README.md) лежат готовые роли — менеджер, разработчик, писатель, ревьюер, судья, инженер данных, оптимизатор, помощник менеджера, дозорный — и общие правила к ним: отчётность, git и worktree, цикл задачи в трекере, безопасность, обратимость операций с данными. Каждый файл роли копируется в `agents/roles/` проекта без правки формата. В каталоге описано, когда поднимать какую роль и что заменить при переносе.
-
-Минимальная заготовка, которую создаёт `team init`, лежит в [`src/agent_team/scaffold/`](src/agent_team/scaffold/).
-
-## Принципы
-
-Подход взят у Gas Town Стива Йегге и сведён к минимуму: от Gas Town взяты принципы, а не его стек (Beads, Dolt, иерархия Deacon и Dogs).
-
-- **Один собеседник.** Пользователь говорит с менеджером. Задачи раздаёт и работу принимает он.
-- **Идентичность отдельно от сессии.** У роли постоянные файл, имя, зона и worktree, а сессия одноразовая: упала или переполнила контекст — роль поднимается заново под тем же именем.
-- **Состояние вне агента.** Задачи и результаты лежат в трекере и в git, поэтому любую сессию можно пересоздать без потерь.
-- **Надзор и слияние — отдельные функции.** Исполнитель не проверяет себя сам и не сливает в основную ветку: сливает только менеджер.
-- **Ограниченные права.** Каждая роль получает список разрешённых инструментов. Полный обход проверок прав инструмент не использует.
-- **Инструмент не знает о проекте.** Зоны, правила безопасности, трекер и команда тестов живут в `agents/` проекта.
-
-## Чего инструмент не делает
-
-- Не хранит и не раздаёт задачи: это трекер проекта и менеджер.
-- Не сливает ветки: это делает менеджер.
-- Не следит за зависшими задачами: это роль-дозорный, если проект её вводит.
-- Не ходит в сеть и не меняет данные проектов.
-- Не отвечает за человека на вопросы о доверии к каталогу и правах.
-
-## Ограничения
-
-- В новом каталоге `claude` спрашивает, доверяете ли вы папке. Роль стоит на этом вопросе, пока человек не ответит в её панели (`team attach <роль>`).
-- Инструмент не задаёт режим разрешений: роли наследуют режим по умолчанию из ваших настроек Claude Code (`permissions.defaultMode`). Если в этом режиме инструмент вне списка роли требует подтверждения, роль встанет на вопросе о праве, и ответить может только человек в её панели.
-- Время «молчит» в `team status` считается по окну tmux: в раскладке `panes` оно общее для всех ролей. Надёжно отличить занятую роль от ждущей инструмент пока не умеет.
-- MCP-серверы Claude Code в local scope и скиллы из `.claude/` привязаны к каталогу запуска. Роли в worktree их не видят: нужные исполнителю интеграции подключаются ему отдельно, работа с трекером обычно остаётся за менеджером.
-- Менеджер в tmux — новая сессия с чистым контекстом. Текущий разговор в него не переносится: менеджер получает состояние из трекера, веток и первого сообщения с передачей дел.
-- Каждая роль — отдельная сессия Claude Code и расходует лимиты вашей подписки или токены API независимо от остальных.
-- `team send --paste` вставляет текст в поле ввода. Если вы в этот момент печатаете в той же панели, тексты смешаются.
-
-## Лицензия
-
-MIT — см. [`LICENSE`](LICENSE).
+MIT — see [`LICENSE`](LICENSE).

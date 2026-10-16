@@ -67,9 +67,10 @@ def claude_argv(team: Team, role: Role, instruction: Path, session_id: str, resu
     binary = os.environ.get("TEAM_CLAUDE_BIN")
     if binary:                      # подмена для тестов: никаких флагов claude
         return shlex.split(binary)
+    # Режим разрешений не задаётся: роль наследует режим по умолчанию из настроек владельца. Жёсткий флаг
+    # перекрывал бы его, и роль вставала бы на вопросах, пока у панели никого нет.
     argv = ["claude", "--name", role.title,
             "--append-system-prompt-file", str(instruction),
-            "--permission-mode", "acceptEdits",
             "--allowedTools", ",".join(allowed_tools(team, role))]
     argv += ["--resume", session_id] if resume else ["--session-id", session_id]
     if role.meta.get("model") not in (None, "", "inherit"):

@@ -59,6 +59,7 @@ def test_claude_argv_for_new_and_resumed_session(project, monkeypatch):
     new = build.claude_argv(team, role, team.state_dir / "x.txt", "SID")
     assert new[0] == "claude" and "--session-id" in new and "--resume" not in new
     assert "--dangerously-skip-permissions" not in new
+    assert "--permission-mode" not in new          # режим наследуется из настроек владельца
     assert "--add-dir" in new
     old = build.claude_argv(team, role, team.state_dir / "x.txt", "SID", resume=True)
     assert "--resume" in old and "--session-id" not in old

@@ -28,6 +28,24 @@ The manager accepts work by checking facts — the commit and the test output �
 
 A role never merges its own work. The manager checks the branch, runs the tests and either returns the task or fast-forwards `main` to the role's branch. The tool itself never merges anything: when to merge, and whose consent it needs, is written in the manager's role file. The manager from the role library merges only what you named, and a reviewer role can sit between the report and the merge.
 
+## Roles
+
+A role is a Markdown file: copy the ones you need from [`roles/`](roles/) into your project's `agents/roles/` and fill in the zone, the test command and the tracker.
+
+| Role                              | What it does                                                     | Kind     |
+|-----------------------------------|------------------------------------------------------------------|----------|
+| [`manager`](roles/manager.md)     | Runs the queue, assigns tasks, accepts work, merges on your word | manager  |
+| [`developer`](roles/developer.md) | Changes code and tests in its own zone                           | executor |
+| [`writer`](roles/writer.md)       | Writes documentation from the code and developer reports         | executor |
+| [`reviewer`](roles/reviewer.md)   | Reviews a branch before merge: accept or return                  | reviewer |
+| [`judge`](roles/judge.md)         | Independently checks high-stakes work for failure scenarios      | reviewer |
+| [`data`](roles/data.md)           | Schema, migrations and pipelines; every bulk change reversible   | executor |
+| [`optimizer`](roles/optimizer.md) | Improves a measurable metric with before-and-after measurements  | executor |
+| [`assistant`](roles/assistant.md) | Gathers facts and prepares decisions for the manager; read-only  | executor |
+| [`watcher`](roles/watcher.md)     | Spots stalled tasks, idle roles and unmerged branches (untested) | watcher  |
+
+Shared rules — reporting, safety, git worktrees, the tracker cycle, data reversibility — are in [`roles/shared/`](roles/shared/); a role pulls them in through its `includes` field. How to adopt a role step by step: [`roles/README.md`](roles/README.md) (in Russian).
+
 ## Principles
 
 - **One conversation.** You talk only to the manager; it assigns tasks and accepts work.
@@ -55,7 +73,7 @@ team up && team attach              # starts the manager and opens tmux
 ## Documentation
 
 - [`docs/agent-guide.md`](docs/agent-guide.md) — setup and operation, step by step.
-- [`examples/`](examples/README.md) — role library: manager, developer, writer, reviewer, judge, data engineer, optimizer, manager's assistant, watcher, and shared rules for them.
+- [`roles/`](roles/README.md) — role library: nine roles, shared rules for them, and how to adopt them in a project.
 - [`docs/SPEC.md`](docs/SPEC.md) — design and decisions: file formats, launch, permissions, messaging.
 - [`CLAUDE.md`](CLAUDE.md) — brief for agents that develop the tool itself.
 

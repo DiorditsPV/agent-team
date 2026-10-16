@@ -5,7 +5,7 @@ This guide takes you from a clean machine to a running team and back: install `t
 What this guide does not cover:
 
 - The full role-file format and design decisions. They are in [`SPEC.md`](SPEC.md) (in Russian); the fields you need to edit are listed in step 5.
-- Which roles to pick. Ready roles and advice on when to use each are in the [role library](../examples/README.md) (in Russian).
+- Which roles to pick. Ready roles and advice on when to use each are in the [role library](../roles/README.md) (in Russian).
 
 `team` prints its messages in Russian. Every expected output below is quoted exactly, with a translation after it.
 
@@ -170,7 +170,7 @@ Every role may use `Read`, `Edit`, `Write`, `Glob`, `Grep`, `Bash(git *)` and `B
 
 Then:
 
-1. Set `status: active` on the scaffold `executor` role, or replace it with roles from the [role library](../examples/README.md). Copy a library role together with the files listed in its `includes` and fill in its `<…>` placeholders.
+1. Set `status: active` on the scaffold `executor` role, or replace it with roles from the [role library](../roles/README.md). Copy a library role together with the files listed in its `includes` and fill in its `<…>` placeholders.
 2. Give each file-editing role its own `worktree` and a zone that no other role shares.
 3. Add `.team/` to the project's `.gitignore`: it holds the team's state cache and the assembled instructions.
 4. Ask the user whether to commit `agents/`. Commit only with their consent.

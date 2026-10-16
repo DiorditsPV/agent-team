@@ -55,13 +55,13 @@
 2. Скопируйте файлы нужных ролей в `agents/roles/`. Имя файла должно совпадать с полем `role:`. Заготовку `executor.md` от `team init` удалите или оставьте, но тогда она тоже должна быть в `team.yaml`.
 
    ```bash
-   cp <клон agent-team>/examples/roles/{manager,developer,reviewer}.md agents/roles/
+   cp <клон agent-team>/roles/{manager,developer,reviewer}.md agents/roles/
    ```
 
 3. Скопируйте в `agents/shared/` все файлы из полей `includes` скопированных ролей. Без них `team check` сообщит об ошибке «подключённого файла нет». Файл `reporting.md` из библиотеки заменяет заготовку `team init`: он дополнен правилом, что вопросы идут менеджеру.
 
    ```bash
-   cp <клон agent-team>/examples/shared/{safety,tracker-cycle,git-worktree,reporting}.md agents/shared/
+   cp <клон agent-team>/roles/shared/{safety,tracker-cycle,git-worktree,reporting}.md agents/shared/
    ```
 
 4. Замените заполнители в угловых скобках (таблица ниже) и поля frontmatter, помеченные комментарием.

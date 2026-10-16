@@ -1,0 +1,14 @@
+# Состав команды проекта. Роли описаны в roles/<role>.md, общие правила — в shared/.
+project: __PROJECT__
+repo: __REPO__
+layout: panes                  # panes — роли панелями одного окна; windows — окно на роль
+worktree_root: ../__PROJECT__-wt
+test_command: ""               # например: .venv/bin/python -m pytest
+
+manager: manager
+
+roles:
+  - role: manager
+    start: manual              # ведущая сессия
+  - role: executor
+    start: on_demand           # поднимается менеджером под задачу

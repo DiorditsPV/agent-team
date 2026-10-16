@@ -6,27 +6,20 @@ A team of Claude Code agents in tmux: you talk to one manager; roles are permane
 
 ## How it works
 
-You give tasks to the manager; the manager hands them to roles working next to it, and the work itself lands in git and your tracker.
+<picture><source media="(prefers-color-scheme: dark)" srcset="docs/images/agent-team-dark.svg"><img src="docs/images/agent-team-light.svg" alt="You talk to the manager, which sends tasks to the developer, reviewer and writer roles and gets reports back; the roles commit to git, the manager verifies and merges, and keeps task status in the tracker." width="880"></picture>
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="docs/images/architecture-dark.svg"><img src="docs/images/architecture-light.svg" alt="You talk to the manager. Roles sit in tmux panes next to it, each with its own worktree and tool list. State lives in git and the tracker." width="800"></picture>
+The team lives in one tmux session, `team-<project>`: the manager on the left, every other role in a pane on the right, so you can attach and watch them all. A role that edits files works in its own git worktree on its own branch. Every role gets a fixed list of allowed tools: file reading and editing, `git`, the project's test command, and whatever its role file adds.
 
-The whole team lives in one tmux session, `team-<project>`. In the `panes` layout that `team init` sets up, the manager takes the left half of the window and every other role gets a pane on the right, so you can attach and watch all of them at once. A role that edits files works in its own git worktree on its own branch. Every role starts with a fixed list of allowed tools: file reading and editing, `git`, the project's test command, and whatever its role file adds. The manager sends tasks to roles with Claude Code's built-in `SendMessage`, addressed to each role's session socket.
+The numbers on the diagram follow one task:
 
-## Roles are permanent, sessions are disposable
+1. **Task.** The manager sends the task with Claude Code's built-in `SendMessage` to the role's session socket.
+2. **Commit and report.** The role commits to its branch and reports back over `SendMessage`.
+3. **Verify.** The manager accepts work by the commit and the test output, not by the report. A reviewer role can sit in between.
+4. **Merge.** The manager fast-forwards `main` to the role's branch or returns the task. A role never merges its own work, and the tool never merges anything: the merge rule is in the manager's role file, and the library manager merges only what you named.
 
-A role keeps its file, name, zone and worktree; the Claude session behind it can be replaced at any time without losing work.
+The manager keeps each task's status in the tracker; a role with access to the tracker updates it too.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="docs/images/role-session-dark.svg"><img src="docs/images/role-session-light.svg" alt="One permanent role above three sessions in a row; each session hands off to the next through handoff and restart --fresh." width="800"></picture>
-
-The bar inside each session is its context filling up. When a session's context is full, or the session crashes, the manager asks the role for a handoff: a short note on what is done, what is in progress and what comes next. The role prints it in its pane and posts it to the task in the tracker. Then `team restart <role> --fresh` starts a new session that picks up from the handoff, the branch and the tracker. Without `--fresh`, `restart` resumes the same session.
-
-## The path of a task
-
-The manager accepts work by checking facts — the commit and the test output — not by reading the report.
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="docs/images/task-flow-dark.svg"><img src="docs/images/task-flow-light.svg" alt="The manager assigns a task; the role works on its branch, commits and reports; the manager checks the commit and tests, then fast-forwards main or returns the work." width="800"></picture>
-
-A role never merges its own work. The manager checks the branch, runs the tests and either returns the task or fast-forwards `main` to the role's branch. The tool itself never merges anything: when to merge, and whose consent it needs, is written in the manager's role file. The manager from the role library merges only what you named, and a reviewer role can sit between the report and the merge.
+The stacked cards behind each role are its sessions. A role keeps its file, name, zone and worktree; the session behind it is replaceable. When a session's context fills up or it crashes, the manager asks for a handoff (`team handoff <role>`): the role writes what is done, in progress and next to the task in the tracker. Then `team restart <role> --fresh` starts a new session from the handoff, the branch and the tracker. Git and the tracker sit outside the TMUX · TEAM frame for this reason: the state lives there, not in an agent's context.
 
 ## Roles
 

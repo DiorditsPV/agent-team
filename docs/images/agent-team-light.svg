@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 552" width="1200" height="552" role="img" aria-label="agent-team: you talk only to the manager; the manager and the roles (developer, reviewer, writer) run in one tmux session; the manager sends a task over SendMessage, the role commits and reports, the manager verifies and merges to main; role sessions are disposable; state lives in git and the tracker">
+<title>agent-team: you talk only to the manager; the manager and the roles (developer, reviewer, writer) run in one tmux session; the manager sends a task over SendMessage, the role commits and reports, the manager verifies and merges to main; role sessions are disposable; state lives in git and the tracker</title>
+<style>
+text { font-family: ui-sans-serif, system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif; fill: #111111; }
+.nd { font-size: 22px; }
+.capl { font-size: 19px; letter-spacing: .16em; fill: #3a3a3a; }
+.ttl { font-size: 22px; font-weight: 500; letter-spacing: .16em; }
+.lb { font-size: 20px; }
+.mu { fill: #6b6b6b; font-size: 19px; }
+.num { fill: #0969da; font-weight: 600; }
+.box { fill: #ffffff; stroke: #262626; stroke-width: 1.2; }
+.base { fill: #ffffff; stroke: #9a9a9a; stroke-width: 1; }
+.bound { fill: none; stroke: #8c8c8c; stroke-width: 1.2; stroke-dasharray: 7 6; }
+.ln { fill: none; stroke: #6b6b6b; stroke-width: 1.2; }
+.chv { fill: none; stroke: #6b6b6b; stroke-width: 1.4; }
+.ch { fill: none; stroke: url(#chg); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 11 9; }
+.glow { fill: none; stroke: #000000; stroke-opacity: .18; stroke-width: 3; }
+</style>
+<defs>
+<pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="1" fill="#d3d3cf"/></pattern>
+<radialGradient id="vig" cx="50%" cy="45%" r="75%"><stop offset=".45" stop-color="#000000" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity=".06"/></radialGradient>
+<linearGradient id="chg" gradientUnits="userSpaceOnUse" x1="452" x2="548" y1="0" y2="0"><stop offset="0" stop-color="#0969da"/><stop offset="1" stop-color="#0fb5c9"/></linearGradient>
+<linearGradient id="gb" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#1f7a45"/><stop offset=".3" stop-color="#1f7a45"/><stop offset=".3" stop-color="#2fa35c"/><stop offset="1" stop-color="#2fa35c"/></linearGradient>
+<linearGradient id="pb" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#6a48d4"/><stop offset=".3" stop-color="#6a48d4"/><stop offset=".3" stop-color="#8f6ef2"/><stop offset="1" stop-color="#8f6ef2"/></linearGradient>
+<linearGradient id="vsh" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".14"/><stop offset="1" stop-color="#000000" stop-opacity=".22"/></linearGradient>
+<filter id="blur" x="-20%" y="-40%" width="140%" height="180%"><feGaussianBlur stdDeviation="4"/></filter>
+<filter id="blur2" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="3"/></filter>
+<marker id="c" viewBox="0 0 16 16" refX="15" refY="8" markerWidth="16" markerHeight="16" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path class="chv" d="M3,1 L15,8 L3,15"/></marker>
+</defs>
+<rect x="0" y="0" width="1200" height="552" rx="12" fill="#fbfbfa"/>
+<rect x="0" y="0" width="1200" height="552" rx="12" fill="url(#dots)"/>
+<rect x="0" y="0" width="1200" height="552" rx="12" fill="url(#vig)"/>
+<path class="bound" d="M448,36 H240 Q230,36 230,46 V508 Q230,518 240,518 H870 Q880,518 880,508 V46 Q880,36 870,36 H662"/>
+<text class="ttl" x="555" y="44" text-anchor="middle">TMUX · TEAM</text>
+<rect class="base" x="50" y="330" width="120" height="7" rx="2"/><rect class="base" x="60" y="337" width="100" height="7" rx="2"/>
+<rect class="glow" x="40" y="214" width="140" height="116" rx="4" filter="url(#blur)"/>
+<rect class="box" x="40" y="214" width="140" height="116" rx="4"/>
+<path d="M92.0,244 l12,10 l-12,10" fill="none" stroke="#0d9488" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><line x1="110.0" y1="265" x2="128.0" y2="265" stroke="#0d9488" stroke-width="3.2" stroke-linecap="round"/>
+<text class="capl" x="110.0" y="302" text-anchor="middle">YOU</text>
+<line class="ln" x1="180" y1="272" x2="278" y2="272" marker-end="url(#c)"/>
+<rect class="box" x="280" y="230" width="140" height="84" rx="4"/>
+<circle cx="350.0" cy="256" r="10" fill="none" stroke="#d97706" stroke-width="2"/><circle cx="350.0" cy="256" r="4.5" fill="#f59e0b"/>
+<text class="nd" x="350.0" y="296" text-anchor="middle">Manager</text>
+<line class="ln" x1="420" y1="272" x2="440" y2="272" marker-end="url(#c)"/>
+<line class="ch" x1="455" y1="272" x2="547" y2="272" filter="url(#blur2)" opacity=".7"/>
+<line class="ch" x1="455" y1="272" x2="547" y2="272"/>
+<line class="ln" x1="560" y1="272" x2="590" y2="272"/>
+<text class="lb" x="503" y="309" text-anchor="middle">SendMessage</text>
+<text class="mu" x="503" y="336" text-anchor="middle"><tspan class="num">1</tspan> task · <tspan class="num">2</tspan> report</text>
+<line class="ln" x1="590" y1="132.0" x2="590" y2="412.0"/>
+<line class="ln" x1="590" y1="132.0" x2="618" y2="132.0" marker-end="url(#c)"/>
+<line class="ln" x1="590" y1="272.0" x2="618" y2="272.0" marker-end="url(#c)"/>
+<line class="ln" x1="590" y1="412.0" x2="618" y2="412.0" marker-end="url(#c)"/>
+<rect class="base" x="630" y="164" width="150" height="7" rx="2"/><rect class="base" x="640" y="171" width="130" height="7" rx="2"/>
+<rect class="box" x="620" y="100" width="170" height="64" rx="4"/><text class="nd" x="705.0" y="139.0" text-anchor="middle">developer</text>
+<rect class="base" x="630" y="304" width="150" height="7" rx="2"/><rect class="base" x="640" y="311" width="130" height="7" rx="2"/>
+<rect class="box" x="620" y="240" width="170" height="64" rx="4"/><text class="nd" x="705.0" y="279.0" text-anchor="middle">reviewer</text>
+<rect class="base" x="630" y="444" width="150" height="7" rx="2"/><rect class="base" x="640" y="451" width="130" height="7" rx="2"/>
+<rect class="box" x="620" y="380" width="170" height="64" rx="4"/><text class="nd" x="705.0" y="419.0" text-anchor="middle">writer</text>
+<text class="mu" x="705.0" y="504" text-anchor="middle">sessions are disposable</text>
+<path fill="url(#gb)" d="M1010,112 V180 A40,12 0 0 0 1090,180 V112 Z"/><path fill="url(#vsh)" d="M1010,112 V180 A40,12 0 0 0 1090,180 V112 Z"/><ellipse fill="#9fe3b8" cx="1050" cy="112" rx="40" ry="12"/>
+<text class="lb" x="1050" y="222" text-anchor="middle" style="fill:#1a7f37">git</text>
+<path fill="url(#pb)" d="M1010,342 V410 A40,12 0 0 0 1090,410 V342 Z"/><path fill="url(#vsh)" d="M1010,342 V410 A40,12 0 0 0 1090,410 V342 Z"/><ellipse fill="#d4c5ff" cx="1050" cy="342" rx="40" ry="12"/>
+<text class="lb" x="1050" y="452" text-anchor="middle" style="fill:#7c3aed">tracker</text>
+<line class="ln" x1="790" y1="132.0" x2="1006" y2="132.0" marker-end="url(#c)"/>
+<text class="lb" x="898" y="120.0"><tspan class="num">2</tspan> commit</text>
+<path class="ln" d="M350.0,230 V76 H1050 V96" marker-end="url(#c)"/>
+<text class="lb" x="364.0" y="104"><tspan class="num">3</tspan> verify · <tspan class="num">4</tspan> merge</text>
+<path class="ln" d="M350.0,314 V478 H960 V376 H1006" marker-end="url(#c)"/>
+<text class="lb" x="364.0" y="468">status</text>
+</svg>

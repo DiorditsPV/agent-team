@@ -1,6 +1,6 @@
 [project]
 name = "agent-team"
-version = "0.1.0"
+version = "0.2.0"
 description = "A team of Claude Code agents in tmux: you talk to one manager; roles are permanent, sessions are disposable — state lives in git and your tracker, not in the agent's context."
 readme = "README.md"
 license = "MIT"
@@ -25,6 +25,10 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/agent_team"]
+
+# Библиотека общих ролей ставится с пакетом: agent_team/library ищется от пакета, а не от репозитория.
+[tool.hatch.build.targets.wheel.force-include]
+"roles" = "agent_team/library"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

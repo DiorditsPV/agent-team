@@ -1,0 +1,30 @@
+  2. Canary    
+     Route a small percentage of customers to the 
+     new billing service first, then gradually    
+     increase traffic as metrics stay healthy. 
+     Problems are caught while the blast radius is
+     small. The tradeoff is a longer rollout and  
+     the need to run both systems and reconcile  
+     data.                                      
+  3. Blue green
+     Run the new billing service in a full 
+     parallel environment and flip all traffic 
+     over when it is verified. Rollback is fast 
+     because the old environment stays intact. The
+     cost is duplicate infrastructure and the     
+     risk of data drift or split state during the 
+     switch.                                      
+  4. Shadow 
+     Send copies of real production billing 
+     traffic to the new service while the old one 
+     remains authoritative, then compare outputs. 
+     No customer is affected by errors, giving    
+     high confidence before cutover. It requires 
+     extra effort to diff results and side effects
+     must be suppressed.                          
+❯ 5. Type something.    
+──────────────────────────────────────────────────
+  6. Chat about this                              
+                    
+Enter to select · ↑/↓ to navigate · ctrl+g to edit
+in VS Code · Esc to cancel                       

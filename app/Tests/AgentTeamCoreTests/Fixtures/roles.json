@@ -1,0 +1,188 @@
+[
+  {
+    "role": "manager",
+    "title": "Менеджер",
+    "kind": "manager",
+    "model": "opus",
+    "description": "Ставит задачи разработчику и писателю, принимает работу по факту, сливает в main; код и тексты не правит",
+    "start": "manual",
+    "file": "/work/agent-team/agents/roles/manager.md",
+    "worktree": null,
+    "zone": [],
+    "includes": [
+      "rules.md",
+      "reporting.md"
+    ],
+    "allow": [
+      "Bash(gh *)"
+    ],
+    "tracker_zone": null,
+    "effective_allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(git *)",
+      "Bash(uv *)",
+      "Bash(team *)",
+      "Bash(gh *)"
+    ],
+    "running": 1,
+    "body": "Ты роль manager проекта agent-team. Задачи получаешь от менеджера сообщением.",
+    "instruction": "Ты роль manager проекта agent-team. Задачи получаешь от менеджера сообщением.\n\n## Общие правила\n\n(собрано из includes)"
+  },
+  {
+    "role": "developer",
+    "title": "Разработчик",
+    "kind": "executor",
+    "model": "sonnet",
+    "description": "Код инструмента team и его тесты в своём worktree",
+    "start": "always",
+    "file": "/work/agent-team/agents/roles/developer.md",
+    "worktree": {
+      "dir": "developer",
+      "branch": "team/developer",
+      "repo": null
+    },
+    "zone": [
+      "src/",
+      "tests/",
+      "pyproject.toml",
+      "uv.lock"
+    ],
+    "includes": [
+      "rules.md",
+      "reporting.md"
+    ],
+    "allow": [],
+    "tracker_zone": null,
+    "effective_allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(git *)",
+      "Bash(uv *)"
+    ],
+    "running": 0,
+    "body": "Ты роль developer проекта agent-team. Задачи получаешь от менеджера сообщением.",
+    "instruction": "Ты роль developer проекта agent-team. Задачи получаешь от менеджера сообщением.\n\n## Общие правила\n\n(собрано из includes)"
+  },
+  {
+    "role": "writer",
+    "title": "Технический писатель",
+    "kind": "executor",
+    "model": "opus",
+    "description": "Документация проекта и скилл /a-team: README, SPEC, бриф; работает по канону агента technical-writer",
+    "start": "always",
+    "file": "/work/agent-team/agents/roles/writer.md",
+    "worktree": {
+      "dir": "writer",
+      "branch": "team/writer",
+      "repo": null
+    },
+    "zone": [
+      "README.md",
+      "docs/",
+      "CLAUDE.md",
+      "skill/",
+      "agents/"
+    ],
+    "includes": [
+      "rules.md",
+      "reporting.md"
+    ],
+    "allow": [],
+    "tracker_zone": null,
+    "effective_allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(git *)",
+      "Bash(uv *)"
+    ],
+    "running": 1,
+    "body": "Ты роль writer проекта agent-team. Задачи получаешь от менеджера сообщением.",
+    "instruction": "Ты роль writer проекта agent-team. Задачи получаешь от менеджера сообщением.\n\n## Общие правила\n\n(собрано из includes)"
+  },
+  {
+    "role": "app-developer",
+    "title": "Разработчик приложения",
+    "kind": "executor",
+    "model": "opus",
+    "description": "Нативное приложение macOS (Swift, SwiftUI) в каталоге app/ и его тесты",
+    "start": "manual",
+    "file": "/work/agent-team/agents/roles/app-developer.md",
+    "worktree": {
+      "dir": "app-developer",
+      "branch": "team/app-developer",
+      "repo": null
+    },
+    "zone": [
+      "app/"
+    ],
+    "includes": [
+      "rules.md",
+      "reporting.md"
+    ],
+    "allow": [
+      "Bash(swift *)",
+      "Bash(xcrun *)",
+      "Bash(xcodebuild *)",
+      "Bash(tmux *)",
+      "Bash(uv run *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(chmod *)",
+      "Bash(ls *)",
+      "Bash(open *)",
+      "Bash(plutil *)",
+      "Bash(codesign *)",
+      "Bash(bash app/*)",
+      "Bash(app/*)",
+      "Bash(ps *)",
+      "Bash(pgrep *)",
+      "Bash(pkill *)",
+      "Bash(screencapture *)",
+      "Bash(mktemp *)"
+    ],
+    "tracker_zone": null,
+    "effective_allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Bash(git *)",
+      "Bash(uv *)",
+      "Bash(swift *)",
+      "Bash(xcrun *)",
+      "Bash(xcodebuild *)",
+      "Bash(tmux *)",
+      "Bash(uv run *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(chmod *)",
+      "Bash(ls *)",
+      "Bash(open *)",
+      "Bash(plutil *)",
+      "Bash(codesign *)",
+      "Bash(bash app/*)",
+      "Bash(app/*)",
+      "Bash(ps *)",
+      "Bash(pgrep *)",
+      "Bash(pkill *)",
+      "Bash(screencapture *)",
+      "Bash(mktemp *)"
+    ],
+    "running": 1,
+    "body": "Ты роль app-developer проекта agent-team. Задачи получаешь от менеджера сообщением.",
+    "instruction": "Ты роль app-developer проекта agent-team. Задачи получаешь от менеджера сообщением.\n\n## Общие правила\n\n(собрано из includes)"
+  }
+]

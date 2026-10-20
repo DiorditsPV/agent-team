@@ -8,7 +8,7 @@ model: opus
 worktree: null
 zone: []
 tracker_zone: null
-includes: [safety.md, reporting.md]
+includes: [safety.md, reading.md, reporting.md]
 allow: [Agent]     # добавьте линтер в режиме проверки, например "Bash(<линтер> check *)"
 ---
 

@@ -1,0 +1,50 @@
+
+ ▐▛███▛█   Claude Code v2.1.295
+▝▜██████▀  Haiku 5.5 · Claude Max
+ ▝▝   ▝▝   ~/work/project
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ◇ claude.ai Figma:file://figma/… – architecture-diagram-instructions
+    ◇ claude.ai Figma:skill://index… – skill-index
+    ◇ claude.ai Figma:file://shader… – shader-runtime-index
+    ◇ claude.ai Figma:file://figma/… – Figma MCP docs: add custom rules
+    ◇ claude.ai Figma:file://figma/… – Figma MCP docs: avoid large frames
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+❯ @
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  [Haiku 5.5] medium main 0m ~/work/project (team/app-developer-2 ✗)
+  ⏸ manual mode on

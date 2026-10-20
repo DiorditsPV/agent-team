@@ -1,0 +1,30 @@
+[
+  {
+    "ts": 1792180000,
+    "type": "owner",
+    "agent": "owner",
+    "text": "Сколько ещё до выпуска?",
+    "task": null
+  },
+  {
+    "ts": 1792179000,
+    "type": "waiting",
+    "agent": "writer#1",
+    "text": "Ждёт ответа: доверяете ли вы папке",
+    "task": "TASK-435"
+  },
+  {
+    "ts": 1792178000,
+    "type": "commit",
+    "agent": "developer#1",
+    "text": "291ec40 · память долгот",
+    "task": "TASK-453"
+  },
+  {
+    "ts": 1792170000,
+    "type": "spawn",
+    "agent": "developer#1",
+    "text": "новая сессия, /work/agent-team-wt/developer",
+    "task": null
+  }
+]

@@ -1,0 +1,40 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[38;5;153m▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔[39m [38;5;246mKept model as [1mSonnet 5.5[0m[38;5;153m ▔
+[39m   [1m[38;5;110mHelp[0m [1m[38;5;16m[48;5;110m General [0m  Commands   Custom commands
+
+   Claude understands your codebase, makes edits with your permission, and executes commands — right from your
+   terminal.
+   [1mShortcuts[0m
+   ! for shell mode          double tap esc to clear input        ctrl + shift + _ to undo
+   / for commands            shift + tab to auto-accept edits     ctrl + z to suspend
+   @ for file paths          ctrl + o for verbose output          ctrl + v to paste images
+   /btw for side question    ctrl + t to toggle tasks             opt + p to switch model
+                             backslash (\) + return (⏎) for       ctrl + s to stash prompt
+                             newline                              ctrl + g to edit in $EDITOR
+                                                                  /keybindings to customize
+
+   For more help: ]8;id=sdguk7;https://code.claude.com/docs/en/overview\https://code.claude.com/docs/en/overview]8;;\
+
+   [3m[38;5;246mEsc to cancel[0m

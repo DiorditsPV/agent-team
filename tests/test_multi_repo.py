@@ -41,14 +41,15 @@ def test_check_rejects_repo_that_is_not_git(multi_project, capsys):
 
 
 @pytest.mark.skipif(shutil.which("tmux") is None, reason="нет tmux")
+@pytest.mark.both_layouts
 def test_up_puts_manager_in_home_and_worktrees_in_their_repos(multi_project):
     team = load_team()
     assert cli.main(["up"]) == 0
-    assert sorted(tmuxctl.panes(team.session)) == ["back", "boss", "de"]
+    assert sorted(tmuxctl.panes(team.session)) == ["back#1", "boss#1", "de#1"]
     state = cli.load_state(team)
-    assert state["boss"]["cwd"] == str(team.home)
+    assert state["boss#1"]["cwd"] == str(team.home)
     for role in ("de", "back"):
         wt = team.worktree_root / role
-        assert state[role]["cwd"] == str(wt)
+        assert state[f"{role}#1"]["cwd"] == str(wt)
         assert _common_dir(wt) == str((multi_project / f"{role}-repo" / ".git").resolve())
     assert (multi_project / ".team" / "state.json").is_file()

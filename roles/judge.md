@@ -8,7 +8,7 @@ model: opus
 worktree: null
 zone: []
 tracker_zone: null
-includes: [safety.md, reporting.md]
+includes: [safety.md, reading.md, reporting.md]
 ---
 
 Ты независимый проверяющий (судья) проекта. Менеджер поднимает тебя на одну значимую работу. Значимая работа:

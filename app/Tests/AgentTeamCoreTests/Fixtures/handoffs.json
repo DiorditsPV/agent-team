@@ -1,0 +1,36 @@
+[
+  {
+    "id": "1792179000-writer#1",
+    "agent": "writer#1",
+    "ts": 1792179000,
+    "task": "TASK-435",
+    "reason": "Новая инструкция роли",
+    "status": "used",
+    "branch": "team/writer",
+    "worktree": "/work/agent-team-wt/writer",
+    "sections": {
+      "done": "Движок читается по выпуску.",
+      "verified": "npm run check — код 0.",
+      "in_progress": "Сверка не начата.",
+      "pitfalls": "Внешний сервис без конфига.",
+      "next": "Прогнать пакет дня"
+    }
+  },
+  {
+    "id": "1792178000-developer#1",
+    "agent": "developer#1",
+    "ts": 1792178000,
+    "task": null,
+    "reason": null,
+    "status": "waiting",
+    "branch": null,
+    "worktree": null,
+    "sections": {
+      "done": "",
+      "verified": "",
+      "in_progress": "",
+      "pitfalls": "",
+      "next": ""
+    }
+  }
+]

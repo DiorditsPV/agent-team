@@ -1,0 +1,60 @@
+{
+  "passed": 11,
+  "issues": [
+    {
+      "level": "ok",
+      "title": "tmux",
+      "detail": "tmux найден"
+    },
+    {
+      "level": "ok",
+      "title": "claude",
+      "detail": "claude найден"
+    },
+    {
+      "level": "ok",
+      "title": "роль manager",
+      "detail": "описание читается, инструкция собирается"
+    },
+    {
+      "level": "ok",
+      "title": "роль developer",
+      "detail": "описание читается, инструкция собирается"
+    },
+    {
+      "level": "ok",
+      "title": "роль writer",
+      "detail": "описание читается, инструкция собирается"
+    },
+    {
+      "level": "ok",
+      "title": "роль app-developer",
+      "detail": "описание читается, инструкция собирается"
+    },
+    {
+      "level": "ok",
+      "title": "менеджер",
+      "detail": "manager — kind manager"
+    },
+    {
+      "level": "ok",
+      "title": "worktree developer",
+      "detail": "репозиторий /work/agent-team"
+    },
+    {
+      "level": "ok",
+      "title": "worktree writer",
+      "detail": "репозиторий /work/agent-team"
+    },
+    {
+      "level": "ok",
+      "title": "worktree app-developer",
+      "detail": "репозиторий /work/agent-team"
+    },
+    {
+      "level": "ok",
+      "title": "зоны",
+      "detail": "зоны ролей не пересекаются"
+    }
+  ]
+}

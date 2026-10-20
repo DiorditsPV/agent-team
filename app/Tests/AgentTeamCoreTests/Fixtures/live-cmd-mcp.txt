@@ -1,0 +1,40 @@
+
+
+[38;5;153m▔▔▔▔▔▔▔▔▔[39m [38;5;220mYou've used 90% of your weekly limit · resets 5pm (Europe/London) · /usage-credits to keep using Claude Code[38;5;153m ▔
+
+[39m  [1mMCP config diagnostics[0m [38;5;220m⚠[39m
+
+  [38;5;246mFor help configuring MCP servers, see: ]8;id=c415zw;https://code.claude.com/docs/en/mcp\https://code.claude.com/docs/en/mcp[39m]8;;\
+
+  [38;5;220m[Contains warnings] [39mUser config (available in all your projects)
+  [38;5;246mLocation: ~/.claude.json                     [39m
+   [38;5;246m└[39m [38;5;220m[Warning][38;5;246m [gitsrv] mcpServers.gitsrv: Missing environment variables: SRV_TOKEN_[39m
+
+   [1m[38;5;153mManage MCP servers[0m
+   [38;5;246m19 servers[39m
+
+     [1mUser MCPs[0m[38;5;246m (~/.claude.json                     )[39m
+   [38;5;153m❯[39m [38;5;114m✔[39m [38;5;153mbrowser-devtool[39m                                      [38;5;246m32 tools[39m
+     [38;5;114m✔[39m charting                                             [38;5;246m5 tools[39m
+     [38;5;114m✔[39m design-library                                       [38;5;246m5 tools[39m
+     [38;5;211m✘[39m gitsrv
+     [38;5;114m✔[39m tasker                                               [38;5;246m25 tools[39m
+     [38;5;114m✔[39m issues                                               [38;5;246m68 tools[39m
+     [38;5;114m✔[39m alerts                                               [38;5;246m3 tools[39m
+
+     [1mclaude.ai[0m
+     [38;5;114m✔[39m claude.ai Docs Editor                                [38;5;246m8 tools[39m
+     [38;5;114m✔[39m claude.ai Diagram                                    [38;5;246m3 tools[39m
+     [38;5;114m✔[39m claude.ai Whiteboard                                 [38;5;246m5 tools[39m
+     [38;5;114m✔[39m claude.ai Mocks                                      [38;5;246m42 tools[39m
+     [38;5;114m✔[39m claude.ai Inbox                                      [38;5;246m30 tools[39m
+     [38;5;114m✔[39m claude.ai Calendar Agenda                            [38;5;246m9 tools[39m
+     [38;5;114m✔[39m claude.ai File Storage                               [38;5;246m11 tools[39m
+     [38;5;114m✔[39m claude.ai Chart Builder                              [38;5;246m1 tool[39m
+     [38;5;114m✔[39m claude.ai Profiles                                   [38;5;246m7 tools[39m
+
+     [1mBuilt-in MCPs[0m[38;5;246m (always available)[39m
+     [38;5;114m✔[39m claude-in-chrome                                     [38;5;246m22 tools[39m
+     [38;5;246m◯[39m computer-use
+     [38;5;114m✔[39m plugin:deploy:deploy                                 [38;5;246m237 tools[39m
+                                                                                                                      [38;5;246m↓[39m

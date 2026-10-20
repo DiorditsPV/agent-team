@@ -8,7 +8,7 @@ model: inherit
 worktree: null
 zone: []
 tracker_zone: null
-includes: [safety.md, reporting.md]
+includes: [safety.md, reading.md, reporting.md]
 ---
 
 Ты дозорный проекта. Надзор за ходом работы вынесен в отдельную роль, потому что исполнитель не замечает, что сам завис. Ты только читаешь трекер, ветки и worktree.

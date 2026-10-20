@@ -1,0 +1,40 @@
+
+
+[38;5;153m▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔[39m [38;5;246mAdvisor Tool (experimental) is on and may use more tokens · /advisor[38;5;153m ▔
+[39m   [1m[38;5;153mSettings[0m  Status   Config  [1m[38;5;16m[48;5;153m Usage [0m  Stats
+
+   [1mSession[0m
+
+   [38;5;246mTotal cost:            $0.0000[39m
+   [38;5;246mTotal duration (API):  0s[39m
+   [38;5;246mTotal duration (wall): 24s[39m
+   [38;5;246mTotal code changes:    0 lines added, 0 lines removed[39m
+   [38;5;246mUsage:                 0 input, 0 output, 0 cache read, 0 cache write[39m
+
+
+   [1mPlugin skill-listing footprint[0m
+   [38;5;246mWhat each plugin's skill descriptions add to the system prompt (cached input after the first turn). Agents and MCP[39m
+   [38;5;246mtools not yet counted.[39m
+
+   [38;5;246mdeploy[39m                      [38;5;246m4 skills · ~225 tok/turn[39m
+   [38;5;246mloop-tools[39m                  [38;5;246m3 skills · ~60 tok/turn[39m
+
+   Total                       ~285 tok/turn
+
+   [1mCurrent session[0m
+   [38;5;153m[48;5;102m█████████▌                                        [39m[49m 19% used
+   [38;5;246mResets 11:19pm (Europe/London)[39m
+
+   [1mCurrent week (all models)[0m
+   [38;5;153m[48;5;102m█████████████████████████████████████████████     [39m[49m 90% used
+   [38;5;246mResets Oct 19 at 4:59pm (Europe/London)[39m
+
+   [1mCurrent week (Fable)[0m
+   [38;5;153m[48;5;102m                                                  [39m[49m 0% used
+   [38;5;246mResets Oct 19 at 4:59pm (Europe/London)[39m
+
+   [1mWhat's contributing to your limits usage?[0m
+   [38;5;246mApproximate, based on local sessions on this machine — does not include other devices or claude.ai[39m
+
+   [38;5;246mLast 24h · these are independent characteristics of your usage, not a breakdown[39m
+                                                                                                                      [38;5;246m↓[39m

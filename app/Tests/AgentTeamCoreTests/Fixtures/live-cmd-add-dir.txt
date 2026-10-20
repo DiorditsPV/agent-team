@@ -1,0 +1,40 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[38;5;153m▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔[39m [38;5;246mTheme picker dismissed[38;5;153m ▔
+[39m   [1m[38;5;153mAdd directory to workspace[0m
+
+   [38;5;246mClaude Code will be able to read files in this directory and make edits when auto-accept edits is on.[39m
+
+   Enter the path to the directory:
+
+   [2m╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮[0m
+   [2m│[0m [2mDirectory path…[0m                                                                                                [2m│[0m
+   [2m╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯[0m
+
+   [3m[38;5;246mTab to complete · Enter to add · Esc to cancel[0m

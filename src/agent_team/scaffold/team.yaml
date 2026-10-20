@@ -2,6 +2,7 @@
 project: __PROJECT__
 repo: __REPO__
 layout: panes                  # panes — роли панелями одного окна; windows — окно на роль
+manager_width: 50%             # ширина панели менеджера в раскладке panes: процент окна или число колонок
 worktree_root: ../__PROJECT__-wt
 test_command: ""               # например: .venv/bin/python -m pytest
 

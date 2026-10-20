@@ -1,0 +1,40 @@
+
+[38;5;174m ▐[48;5;16m▛███▛█[39m[49m   [1mClaude Code[0m [38;5;246mv2.1.292[39m
+[38;5;174m▝▜[48;5;16m█████[49m█▀[39m  [38;5;246mSonnet 5.5 with medium effort · Claude Max[39m
+[38;5;174m ▝▝   ▝▝ [39m  [38;5;246m~/work/project                    [39m
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[38;5;153m▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔[39m [38;5;246mAdvisor Tool (experimental) is on and may use more tokens · /advisor[38;5;153m ▔
+[39m   [1m[38;5;153mMemory[0m
+
+   [38;5;246m❯[39m Auto-memory  true
+
+   [38;5;153m❯[39m [38;5;153mUser instructions[39m      [38;5;246mSaved in ~/.claude/CLAUDE.md[39m
+     Project instructions   [38;5;246mChecked in at ./CLAUDE.md[39m
+     CLAUDE.local.md
+     Open auto-memory folder
+
+   [38;5;246mLearn more: ]8;id=1qzeytb;https://code.claude.com/docs/en/memory\https://code.claude.com/docs/en/memory[39m]8;;\
+
+   [3m[38;5;246mEnter to confirm · Esc to cancel[0m

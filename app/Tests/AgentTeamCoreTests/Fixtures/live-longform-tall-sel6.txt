@@ -1,0 +1,58 @@
+
+           Claude Code v2.1.295
+ ▐▛███▛█   Sonnet 5.5 with medium effort
+▝▜██████▀  Claude Max
+ ▝▝   ▝▝   /…/scratchpad/ws
+
+
+❯ Use the AskUserQuestion tool once. Question:    
+  "Which rollout strategy should we use for the   
+  new billing service?" header "Rollout", 4       
+  options, each with a long description of 3-4    
+  sentences (about 300 characters). Labels: Big   
+  bang, Canary, Blue green, Shadow. Do nothing    
+  else.                                           
+──────────────────────────────────────────────────
+ ☐ Rollout 
+
+Which rollout strategy should we use for the new 
+billing service?
+
+  1. Big bang
+     Switch all customers to the new billing 
+     service at once on a single cutover date. 
+     This is the simplest to plan and avoids 
+     running two systems in parallel. However, any
+     defect hits every customer immediately, and 
+     rollback is difficult once invoices have been
+     generated.
+  2. Canary
+     Route a small percentage of customers to the 
+     new billing service first, then gradually 
+     increase traffic as metrics stay healthy. 
+     Problems are caught while the blast radius is
+     small. The tradeoff is a longer rollout and 
+     the need to run both systems and reconcile 
+     data.
+  3. Blue green
+     Run the new billing service in a full 
+     parallel environment and flip all traffic 
+     over when it is verified. Rollback is fast 
+     because the old environment stays intact. The
+     cost is duplicate infrastructure and the 
+     risk of data drift or split state during the 
+     switch.
+  4. Shadow
+     Send copies of real production billing 
+     traffic to the new service while the old one 
+     remains authoritative, then compare outputs. 
+     No customer is affected by errors, giving 
+     high confidence before cutover. It requires 
+     extra effort to diff results and side effects
+     must be suppressed.
+  5. Type something.
+──────────────────────────────────────────────────
+❯ 6. Chat about this
+
+Enter to select · ↑/↓ to navigate · ctrl+g to edit
+in VS Code · Esc to cancel
